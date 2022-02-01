@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/telegram-bot-rb/telegram-bot.git
+  revision: 2d73d1c8790c4625d0433772b3417e1988c007d2
+  specs:
+    telegram-bot (0.15.4)
+      actionpack (>= 4.0, < 7.1)
+      activesupport (>= 4.0, < 7.1)
+      httpclient (~> 2.7)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -81,6 +90,7 @@ GEM
     erubi (1.10.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
+    httpclient (2.8.3)
     i18n (1.9.1)
       concurrent-ruby (~> 1.0)
     importmap-rails (1.0.2)
@@ -210,6 +220,7 @@ DEPENDENCIES
   sprockets-rails
   stimulus-rails
   tailwindcss-rails
+  telegram-bot!
   turbo-rails
   tzinfo-data
   web-console
