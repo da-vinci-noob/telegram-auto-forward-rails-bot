@@ -1,2 +1,3 @@
 web: rails s
-autoforwarder: python lib/autoforward/bot.py
+autoforwarder: python3 lib/autoforward/bot.py
+bot: rake telegram:bot:poller
