@@ -64,6 +64,10 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+  gem 'rubocop'
+  gem 'rubocop-rails'
+  gem 'rubocop-performance', require: false
+  gem 'rubocop-packaging'
 end
 
 gem 'telegram-bot', git: 'https://github.com/telegram-bot-rb/telegram-bot.git'

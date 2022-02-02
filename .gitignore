@@ -34,3 +34,5 @@
 !/app/assets/builds/.keep
 
 .env
+/.idea
+__pycache__
