@@ -1,13 +1,15 @@
 class TelegramController < Telegram::Bot::UpdatesController
+  include Instructions
   # use callbacks like in any other controller
   around_action :with_locale
+  before_action :set_variables
 
   # Every update has one of: message, inline_query, chosen_inline_result,
   # callback_query, etc.
   # Define method with the same name to handle this type of update.
   def message(message)
     # store_message(message['text'])
-    puts "inside message"
+    Rails.logger.debug 'inside message'
     respond_with :message, text: message['text']
   end
 
@@ -23,22 +25,22 @@ class TelegramController < Telegram::Bot::UpdatesController
   # Command arguments will be parsed and passed to the method.
   # Be sure to use splat args and default values to not get errors when
   # someone passed more or less arguments in the message.
-  def start!(word = nil, *other_words)
-    # do_smth_with(word)
-
-    # full message object is also available via `payload` instance method:
-    # process_raw_message(payload['text'])
-
-    # There are `chat` & `from` shortcut methods.
-    # For callback queries `chat` is taken from `message` when it's available.
-    response = from ? "Hello #{from['username']}!" : 'Hi there!'
-
-    # There is `respond_with` helper to set `chat_id` from received message:
-    respond_with :message, text: response
-
-    # `reply_with` also sets `reply_to_message_id`:
-    # reply_with :photo, photo: File.open('party.jpg')
-  end
+  # def start!(word = nil, *other_words)
+  #   # do_smth_with(word)
+  #
+  #   # full message object is also available via `payload` instance method:
+  #   # process_raw_message(payload['text'])
+  #
+  #   # There are `chat` & `from` shortcut methods.
+  #   # For callback queries `chat` is taken from `message` when it's available.
+  #   response = from ? "Hello #{from['username']}!" : 'Hi there!'
+  #
+  #   # There is `respond_with` helper to set `chat_id` from received message:
+  #   respond_with :message, text: response
+  #
+  #   # `reply_with` also sets `reply_to_message_id`:
+  #   # reply_with :photo, photo: File.open('party.jpg')
+  # end
 
   private
 
@@ -52,5 +54,11 @@ class TelegramController < Telegram::Bot::UpdatesController
     elsif chat
       # locale for chat
     end
+  end
+
+  def set_variables
+    @first_name = chat['first_name']
+    @chat_id = chat['id']
+    @username = chat['username']
   end
 end

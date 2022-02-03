@@ -31,3 +31,61 @@
 
 en:
   hello: "Hello world"
+  instructions:
+    start: |
+      Hello, %{first_name} 🤖.
+      All I can do is say hello for now.
+      This Bot can save you a lot time. Try /help to see available commands.
+    bitly: |
+      Hello, %{first_name}. 🤖
+      You need to make an Account on https://bit.ly
+      
+      1. Goto https://bitly.com/
+      2. Create an Account and Login
+      3. Then goto https://bitly.is/accesstoken to and generate your access token for bit.ly to generate short links
+      4. Then copy the generated Access Token
+      5. Set your Bitly Access token for link shortning
+      `/bitly <access_token>`
+      Example: `/bitly ACCESS_TOKENbhdsirb`
+      
+      And Finally
+      Send Your Message with Flipkart or Amazon Link
+    help: |
+      Hello, %{first_name}. 🤖
+      You need to make do some setup before the using this Bot
+
+      Available Commands are
+      1. Set your Amazon Affiliate Tracking ID
+      `/amazon tracking_id`
+      Example: `/amazon track-21`
+
+      2. Set your Flipkart Affiliate Tracking ID
+      `/flipkart tracking_id`
+      Example: `/flipkart track_id`
+
+      3. Set your Bitly API Key for link shortning
+      `/bitly <api_key>`
+      Click here to know how to setup `/bitly_setup`
+      Example: `/bitly API_KEYbhdsirb`
+
+      4. *NEW ADDITION* (Optional)
+      Forward your messages to Channel. Add this bot to your channel as an Admin and setup the Channel in the Bot by command 
+      `/forward <username of the channel including @>`
+      Example: `/forward @google`
+
+      5. *NEW ADDITION* (Optional)
+      You can disable link Previews for the messages that bot returns.
+      Example:
+      `/previews disable (For Disabling Link previews)`
+      `/previews *anything else* (For Enabling Link Previews)`
+
+      6. *NEW ADDITION* (Optional)
+      You can now add characters/text/word to delete from message (This can include any promotional message.) by
+      `/delete *text to delete*`
+      Example: `/delete hello`
+
+      7. Show Your Words which you have included to the delete list.
+      Example: [/show_deleted](/show_deleted)
+
+      And Finally
+      Send Your Message with Flipkart or Amazon Link"
