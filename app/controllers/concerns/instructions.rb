@@ -6,7 +6,7 @@ module Instructions
     respond_with :message, text: (I18n.t 'instructions.start', first_name: @first_name)
   end
 
-  def bitly!
+  def bitly_setup!
     respond_with :message, text: (I18n.t 'instructions.bitly', first_name: @first_name), parse_mode: :markdown
   end
 
