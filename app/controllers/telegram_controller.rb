@@ -1,5 +1,6 @@
 class TelegramController < Telegram::Bot::UpdatesController
   include Instructions
+  include Validate
   # use callbacks like in any other controller
   around_action :with_locale
   before_action :set_variables
