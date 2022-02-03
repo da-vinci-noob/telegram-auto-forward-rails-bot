@@ -2,19 +2,19 @@
 module Validate
   extend ActiveSupport::Concern
 
-  def self.bitly
+  def validate_bitly
     Cache.redis.exists?("#{@chat_id}:bitly_id")
   end
 
-  def self.flipkart
+  def validate_flipkart
     Cache.redis.exists?("#{@chat_id}:fkrt_id")
   end
 
-  def self.amazon
+  def validate_amazon
     Cache.redis.exists?("#{@chat_id}:amzn_id")
   end
 
-  def self.all
-    bitly && flipkart && amazon
+  def validate_all
+    validate_bitly && validate_flipkart && validate_amazon
   end
 end

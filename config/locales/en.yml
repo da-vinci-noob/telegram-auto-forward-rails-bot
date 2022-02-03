@@ -31,6 +31,9 @@
 
 en:
   hello: "Hello world"
+  setup:
+    invalid: Please Enter Valid %{param} input
+    amazon:  Hello, Your Amazon Affiliate ID has been set to `%{amzn_id}`. 🤖
   instructions:
     start: |
       Hello, %{first_name} 🤖.
