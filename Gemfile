@@ -71,3 +71,4 @@ group :development do
 end
 
 gem 'telegram-bot', git: 'https://github.com/telegram-bot-rb/telegram-bot.git'
+gem 'redis'
