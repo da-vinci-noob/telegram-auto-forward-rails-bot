@@ -34,6 +34,14 @@ en:
   setup:
     invalid: Please Enter Valid %{param} input
     amazon:  Hello, Your Amazon Affiliate ID has been set to `%{amzn_id}`. 🤖
+    flipkart: Hello, Your Flipkart Affiliate ID has been set to `%{fkrt_id}`. 🤖
+    bitly: Hello, Your Bitly Access Token has been set to %{bitly_id}. 🤖
+    forward: Hello, Your Messages will be forward to %{channel}. 🤖
+    previews: Your Link Previews will be %{input} from now!
+    delete: "`%{content}`, has been added to the list of text which will be removed from the returned message by bot."
+    deleted_contents: |
+      %{contents}
+      These words has been added by you to the Bot and will be removed from the Returned Message"
   instructions:
     start: |
       Hello, %{first_name} 🤖.
