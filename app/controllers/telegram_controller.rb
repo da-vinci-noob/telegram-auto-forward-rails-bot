@@ -18,7 +18,7 @@ class TelegramController < Telegram::Bot::UpdatesController
     else
       invalid_message(message['text'])
     end
-    respond_with :message, text: reply_message
+    reply_with :message, text: reply_message
   end
 
   # For the following types of updates commonly used params are passed as arguments,
