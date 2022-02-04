@@ -32,7 +32,7 @@
 en:
   hello: "Hello world"
   setup:
-    invalid: Please Enter Valid %{param} input
+    invalid: Please Enter valid %{param} input
     amazon:  Hello, Your Amazon Affiliate ID has been set to `%{amzn_id}`. 🤖
     flipkart: Hello, Your Flipkart Affiliate ID has been set to `%{fkrt_id}`. 🤖
     bitly: Hello, Your Bitly Access Token has been set to %{bitly_id}. 🤖
@@ -42,6 +42,13 @@ en:
     deleted_contents: |
       %{contents}
       These words has been added by you to the Bot and will be removed from the Returned Message"
+    user_profile: |
+      Amazon Tracking ID: `%{amzn_id}`
+      Flipkart Tracking ID: `%{fkrt_id}`
+      Bitly Access Token: `%{bitly_id}`
+      Forwarding to (if any): `%{forward}`
+      Previews Are: `%{previews}`
+      Text to Delete: `%{delete}`
   instructions:
     start: |
       Hello, %{first_name} 🤖.
@@ -97,6 +104,9 @@ en:
 
       7. Show Your Words which you have included to the delete list.
       Example: [/show_deleted](/show_deleted)
+      
+      8. Show Your Complete Configuration which you have set in the Bot..
+      Example: [/user_profile](/user_profile)
 
       And Finally
       Send Your Message with Flipkart or Amazon Link"

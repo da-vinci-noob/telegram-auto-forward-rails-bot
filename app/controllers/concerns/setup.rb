@@ -50,6 +50,16 @@ module Setup
     respond_with :message, text: (I18n.t 'setup.deleted_contents', contents: contents.join(', '))
   end
 
+  def user_profile!(*answer)
+    content = I18n.t 'setup.user_profile', amzn_id: Cache.redis.get("#{@chat_id}:amzn_id"),
+                                           fkrt_id: Cache.redis.get("#{@chat_id}:fkrt_id"),
+                                           bitly_id: Cache.redis.get("#{@chat_id}:bitly_id"),
+                                           forward: Cache.redis.get("#{@chat_id}:forward"),
+                                           previews: Cache.redis.get("#{@chat_id}:previews"),
+                                           delete: Cache.redis.smembers("#{@chat_id}:delete")
+    respond_with :message, text: content, parse_mode: :markdown
+  end
+
   private
 
   def configure_amazon(amzn_id)
