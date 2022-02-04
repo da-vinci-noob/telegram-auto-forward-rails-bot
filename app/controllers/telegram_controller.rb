@@ -2,6 +2,7 @@ class TelegramController < Telegram::Bot::UpdatesController
   include Instructions
   include Validate
   include Setup
+  include Affiliate
 
   # use callbacks like in any other controller
   around_action :with_locale
@@ -12,8 +13,12 @@ class TelegramController < Telegram::Bot::UpdatesController
   # Define method with the same name to handle this type of update.
   def message(message)
     # store_message(message['text'])
-    Rails.logger.debug 'inside message'
-    respond_with :message, text: message['text']
+    reply_message = if message['text'].match? /http/i
+      process_affiliate(message['text'])
+    else
+      invalid_message(message['text'])
+    end
+    respond_with :message, text: reply_message
   end
 
   # For the following types of updates commonly used params are passed as arguments,
@@ -63,5 +68,22 @@ class TelegramController < Telegram::Bot::UpdatesController
     @first_name = chat['first_name']
     @chat_id = chat['id']
     @username = chat['username']
+  end
+
+  def process_affiliate(message)
+    return 'Please Setup the Bot first' unless validate_all?
+
+    process = Process.new(@chat_id)
+    updated_msg = message
+    urls = URI.extract(updated_msg, %w[http https])
+    urls.each do |url|
+      process.individual_url(url)
+      updated_msg.sub!(url, process.updated_url)
+    end
+    updated_msg
+  end
+
+  def invalid_message(message)
+    "I have no idea what #{message} means. \nYou can view available commands with /help"
   end
 end
