@@ -34,5 +34,11 @@ module TelegramAutoForwardRailsBot
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+    Rails.application.routes.default_url_options =
+      if Rails.env.production?
+        { host: ENV.fetch('DEFAULT_ROUTE'), protocol: 'https' }
+      else
+        { host: 'localhost:3000' }
+      end
   end
 end
