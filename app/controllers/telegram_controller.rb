@@ -18,6 +18,7 @@ class TelegramController < Telegram::Bot::UpdatesController
     if @message_content.match? /http/i
       process_affiliate
       filter_message
+      send_to_channel
     else
       invalid_message
     end
@@ -82,9 +83,28 @@ class TelegramController < Telegram::Bot::UpdatesController
       process.individual_url(url)
       @message_content.sub!(url, process.updated_url)
     end
+    @success = true unless process.error
   end
 
   def invalid_message
     @message_content = "I have no idea what #{@message_content} means. \nYou can view available commands with /help"
+  end
+
+  def send_to_channel
+    channel_id = Cache.redis.get("#{@chat_id}:forward")
+    return unless channel_id && @success
+
+    begin
+      bot.send_message(chat_id: channel_id, text: @message_content, disable_web_page_preview: disable_previews)
+    rescue Telegram::Bot::Error => e
+      message = if e.message.include? 'bot is not a member'
+        'Please Double check Channel Username if you have added the Bot as an Admin to the Channel.'
+      else
+        'Please enter correct Channel Username with "@" prefix '
+      end
+      respond_with :message, text: message
+    rescue StandardError
+      respond_with :message, text: 'An Error Occured While forwarding this message to Channel'
+    end
   end
 end
