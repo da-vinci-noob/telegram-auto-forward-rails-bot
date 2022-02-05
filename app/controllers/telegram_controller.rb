@@ -3,6 +3,7 @@ class TelegramController < Telegram::Bot::UpdatesController
   include Validate
   include Setup
   include Affiliate
+  include ParseMessage
 
   # use callbacks like in any other controller
   around_action :with_locale
@@ -13,13 +14,14 @@ class TelegramController < Telegram::Bot::UpdatesController
   # Define method with the same name to handle this type of update.
   def message(message)
     # store_message(message['text'])
-    reply_message = if message['text'].match? /http/i
-      process_affiliate(message['text'])
+    @message_content = message['text']
+    if @message_content.match? /http/i
+      process_affiliate
+      filter_message
     else
-      invalid_message(message['text'])
+      invalid_message
     end
-    disable_previews = Cache.redis.get("#{@chat_id}:previews") == 'disable'
-    reply_with :message, text: reply_message, disable_web_page_preview: disable_previews
+    reply_with :message, text: @message_content, disable_web_page_preview: disable_previews
   end
 
   # For the following types of updates commonly used params are passed as arguments,
@@ -71,20 +73,18 @@ class TelegramController < Telegram::Bot::UpdatesController
     @username = chat['username']
   end
 
-  def process_affiliate(message)
+  def process_affiliate
     return 'Please Setup the Bot first' unless validate_all?
 
     process = Process.new(@chat_id)
-    updated_msg = message
-    urls = URI.extract(updated_msg, %w[http https])
+    urls = URI.extract(@message_content, %w[http https])
     urls.each do |url|
       process.individual_url(url)
-      updated_msg.sub!(url, process.updated_url)
+      @message_content.sub!(url, process.updated_url)
     end
-    updated_msg
   end
 
-  def invalid_message(message)
-    "I have no idea what #{message} means. \nYou can view available commands with /help"
+  def invalid_message
+    @message_content = "I have no idea what #{@message_content} means. \nYou can view available commands with /help"
   end
 end
