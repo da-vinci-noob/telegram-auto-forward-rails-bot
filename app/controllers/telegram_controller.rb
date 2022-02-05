@@ -18,7 +18,8 @@ class TelegramController < Telegram::Bot::UpdatesController
     else
       invalid_message(message['text'])
     end
-    reply_with :message, text: reply_message
+    disable_previews = Cache.redis.get("#{@chat_id}:previews") == 'disable'
+    reply_with :message, text: reply_message, disable_web_page_preview: disable_previews
   end
 
   # For the following types of updates commonly used params are passed as arguments,
