@@ -13,13 +13,13 @@ module Affiliate
       @updated_url = url
       case updated_url
       when /amazon.in/
-        amazon(url, short: false)
+        amazon(short: false)
       when /amzn.to/, /amzn.in/
-        amazon(url, short: true)
+        amazon(short: true)
       when /flipkart.com/
-        flipkart(url, short: false)
+        flipkart(short: false)
       when /fkrt.it/
-        flipkart(url, short: true)
+        flipkart(short: true)
       else
         redirection(url)
       end
@@ -27,7 +27,7 @@ module Affiliate
 
     private
 
-    def amazon(url, short: false)
+    def amazon(short: false)
       fetch_url if short
       clean_url
       amzn_id = Cache.redis.get("#{chat_id}:amzn_id")
@@ -35,7 +35,7 @@ module Affiliate
       @updated_url = shorten_url(updated_url)
     end
 
-    def flipkart(url, short: false)
+    def flipkart(short: false)
       fetch_url if short
       clean_url
       fkrt_id = Cache.redis.get("#{chat_id}:fkrt_id")
@@ -44,8 +44,14 @@ module Affiliate
     end
 
     def redirection(url)
-      @error = true
-      @updated_url = "URL Not Supported: #{url}"
+      response = HTTParty.get(url, follow_redirects: true)
+      last_url = check_for_linksredirect_url(response) || response.request.last_uri.to_s
+      if last_url == updated_url
+        @error = true
+        @updated_url = "URL Not Supported: #{url}"
+      else
+        individual_url(last_url)
+      end
     end
 
     def fetch_url
@@ -96,6 +102,11 @@ module Affiliate
       @error = true
       puts e.inspect
       e.inspect
+    end
+
+    def check_for_linksredirect_url(res)
+      urls = URI.extract(res.parsed_response, %w[http https])
+      urls[2] if res.include? 'cashbackUrl'
     end
   end
 end
