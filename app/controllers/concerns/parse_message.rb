@@ -7,6 +7,6 @@ module ParseMessage
   end
 
   def disable_previews
-    Cache.redis.get("#{@chat_id}:previews") == 'disable'
+    Cache.redis.get("#{@chat_id}:previews") == 'disabled'
   end
 end
