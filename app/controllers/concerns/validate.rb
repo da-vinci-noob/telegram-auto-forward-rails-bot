@@ -15,6 +15,6 @@ module Validate
   end
 
   def validate_all?
-    validate_bitly? && validate_flipkart? && validate_amazon?
+    validate_flipkart? && validate_amazon?
   end
 end

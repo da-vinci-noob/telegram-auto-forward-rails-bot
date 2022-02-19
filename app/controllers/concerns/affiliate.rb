@@ -32,7 +32,7 @@ module Affiliate
       clean_url
       amzn_id = Cache.redis.get("#{chat_id}:amzn_id")
       add_tracking_id(amzn_id, 'tag')
-      @updated_url = shorten_url(updated_url)
+      @updated_url = shorten_url(updated_url) if Cache.redis.exists?("#{@chat_id}:bitly_id")
     end
 
     def flipkart(short: false)

@@ -110,3 +110,13 @@ en:
 
       And Finally
       Send Your Message with Flipkart or Amazon Link"
+
+
+  no_setup: |
+    Hello, %{first_name}. 🤖
+    
+    Please Setup the Bot First.
+    
+    Amazon and Flipkart tags are mandatory, if you are not using anyone of them you can just update some random character to it.
+    
+    If you want short links to all those long affiliate links, you need to update Bitly Access Token.

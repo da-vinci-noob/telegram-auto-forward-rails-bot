@@ -22,6 +22,7 @@ class TelegramController < Telegram::Bot::UpdatesController
     else
       invalid_message
     end
+    Rails.logger.debug(@message_content)
     reply_with :message, text: @message_content, disable_web_page_preview: disable_previews
   end
 
@@ -75,7 +76,7 @@ class TelegramController < Telegram::Bot::UpdatesController
   end
 
   def process_affiliate
-    return 'Please Setup the Bot first' unless validate_all?
+    @message_content = I18n.t 'no_setup', first_name: @first_name unless validate_all?
 
     process = Process.new(@chat_id)
     urls = URI.extract(@message_content, %w[http https])
