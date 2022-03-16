@@ -14,7 +14,7 @@ class TelegramController < Telegram::Bot::UpdatesController
   # Define method with the same name to handle this type of update.
   def message(message)
     # store_message(message['text'])
-    @message_content = message['text']
+    @message_content = message['text'].gsub('<', '&lt;').gsub('>', '&gt;')
     parse_inline_entitites(message['entities']) if message['entities']
     if @message_content.match? /http/i
       process_affiliate
@@ -24,7 +24,7 @@ class TelegramController < Telegram::Bot::UpdatesController
       invalid_message
     end
     Rails.logger.debug(@message_content)
-    reply_with :message, text: @message_content, disable_web_page_preview: disable_previews, parse_mode: :markdown
+    reply_with :message, text: @message_content, disable_web_page_preview: disable_previews, parse_mode: :html
   end
 
   # For the following types of updates commonly used params are passed as arguments,
@@ -97,7 +97,7 @@ class TelegramController < Telegram::Bot::UpdatesController
     return unless channel_id && @success
 
     begin
-      bot.send_message(chat_id: channel_id, text: @message_content, disable_web_page_preview: disable_previews, parse_mode: :markdown)
+      bot.send_message(chat_id: channel_id, text: @message_content, disable_web_page_preview: disable_previews, parse_mode: :html)
     rescue Telegram::Bot::Error => e
       message = if e.message.include? 'bot is not a member'
         'Please Double check Channel Username if you have added the Bot as an Admin to the Channel.'
@@ -125,13 +125,13 @@ class TelegramController < Telegram::Bot::UpdatesController
   def format_single_entity(entity, offset)
     case entity['type']
     when 'text_link'
-      "[#{@message_content[offset, entity['length']]}](#{entity['url']} )"
+      "<a href='#{entity['url']} '>#{@message_content[offset, entity['length']]}</a>"
     when 'bold'
-      "*#{@message_content[offset, entity['length']]}*"
+      "<b>#{@message_content[offset, entity['length']]}</b>"
     when 'code'
-      "`#{@message_content[offset, entity['length']]}`"
+      "<code>#{@message_content[offset, entity['length']]}</code>"
     when 'italic'
-      "_#{@message_content[offset, entity['length']]}_"
+      "<i>#{@message_content[offset, entity['length']]}</i>"
     end
   end
 end
