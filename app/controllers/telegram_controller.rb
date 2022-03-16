@@ -15,6 +15,7 @@ class TelegramController < Telegram::Bot::UpdatesController
   def message(message)
     # store_message(message['text'])
     @message_content = message['text']
+    parse_inline_entitites(message['entities']) if message['entities']
     if @message_content.match? /http/i
       process_affiliate
       filter_message
@@ -23,7 +24,7 @@ class TelegramController < Telegram::Bot::UpdatesController
       invalid_message
     end
     Rails.logger.debug(@message_content)
-    reply_with :message, text: @message_content, disable_web_page_preview: disable_previews
+    reply_with :message, text: @message_content, disable_web_page_preview: disable_previews, parse_mode: :markdown
   end
 
   # For the following types of updates commonly used params are passed as arguments,
@@ -106,6 +107,31 @@ class TelegramController < Telegram::Bot::UpdatesController
       respond_with :message, text: message
     rescue StandardError
       respond_with :message, text: 'An Error Occured While forwarding this message to Channel'
+    end
+  end
+
+  def parse_inline_entitites(entities)
+    offset_fix = 0
+    entities.each do |entity|
+      offset = entity['offset'] + offset_fix
+      text = format_single_entity(entity, offset)
+      next if text.nil?
+
+      @message_content[offset, entity['length']] = text
+      offset_fix += text.size - entity['length']
+    end
+  end
+
+  def format_single_entity(entity, offset)
+    case entity['type']
+    when 'text_link'
+      "[#{@message_content[offset, entity['length']]}](#{entity['url']} )"
+    when 'bold'
+      "*#{@message_content[offset, entity['length']]}*"
+    when 'code'
+      "`#{@message_content[offset, entity['length']]}`"
+    when 'italic'
+      "_#{@message_content[offset, entity['length']]}_"
     end
   end
 end
