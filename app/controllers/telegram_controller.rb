@@ -97,7 +97,7 @@ class TelegramController < Telegram::Bot::UpdatesController
     return unless channel_id && @success
 
     begin
-      bot.send_message(chat_id: channel_id, text: @message_content, disable_web_page_preview: disable_previews)
+      bot.send_message(chat_id: channel_id, text: @message_content, disable_web_page_preview: disable_previews, parse_mode: :markdown)
     rescue Telegram::Bot::Error => e
       message = if e.message.include? 'bot is not a member'
         'Please Double check Channel Username if you have added the Bot as an Admin to the Channel.'
