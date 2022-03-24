@@ -24,7 +24,7 @@ class TelegramController < Telegram::Bot::UpdatesController
       invalid_message
     end
     Rails.logger.debug(@message_content)
-    reply_with :message, text: @message_content, disable_web_page_preview: disable_previews, parse_mode: :html
+    reply_with :message, text: @message_content.gsub('<', '&lt;').gsub('>', '&gt;'), disable_web_page_preview: disable_previews, parse_mode: :html
   end
 
   # For the following types of updates commonly used params are passed as arguments,
