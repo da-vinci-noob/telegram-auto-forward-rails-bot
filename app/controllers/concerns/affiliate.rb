@@ -101,7 +101,7 @@ module Affiliate
     rescue StandardError => e
       @error = true
       puts e.inspect
-      e.inspect
+      e.inspect.gsub('<', '&lt;').gsub('>', '&gt;')
     end
 
     def check_for_linksredirect_url(res)
