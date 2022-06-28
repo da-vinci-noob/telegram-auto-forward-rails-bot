@@ -106,7 +106,7 @@ class TelegramController < Telegram::Bot::UpdatesController
       end
       respond_with :message, text: message
     rescue StandardError
-      respond_with :message, text: 'An Error Occured While forwarding this message to Channel'
+      respond_with :message, text: t('errors.channel_forward')
     end
   end
 
@@ -120,6 +120,8 @@ class TelegramController < Telegram::Bot::UpdatesController
       @message_content[offset, entity['length']] = text
       offset_fix += text.size - entity['length']
     end
+  rescue IndexError
+    reply_with :message, text: t('errors.formatting')
   end
 
   def format_single_entity(entity, offset)

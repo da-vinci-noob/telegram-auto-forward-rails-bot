@@ -30,15 +30,15 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  hello: 'Hello world'
   setup:
     invalid: Please Enter valid %{param} input
-    amazon:  Hello, Your Amazon Affiliate ID has been set to `%{amzn_id}`. 🤖
+    amazon: Hello, Your Amazon Affiliate ID has been set to `%{amzn_id}`. 🤖
     flipkart: Hello, Your Flipkart Affiliate ID has been set to `%{fkrt_id}`. 🤖
     bitly: Hello, Your Bitly Access Token has been set to %{bitly_id}. 🤖
     forward: Hello, Your Messages will be forward to %{channel}. 🤖
     previews: Your Link Previews will be %{input} from now!
-    delete: "`%{content}`, has been added to the list of text which will be removed from the returned message by bot."
+    delete: '`%{content}`, has been added to the list of text which will be removed from the returned message by bot.'
     deleted_contents: |
       %{contents}
       These words has been added by you to the Bot and will be removed from the Returned Message"
@@ -57,7 +57,7 @@ en:
     bitly: |
       Hello, %{first_name}. 🤖
       You need to make an Account on https://bit.ly
-      
+
       1. Goto https://bitly.com/
       2. Create an Account and Login
       3. Then goto https://bitly.is/accesstoken to and generate your access token for bit.ly to generate short links
@@ -65,7 +65,7 @@ en:
       5. Set your Bitly Access token for link shortning
       `/bitly <access_token>`
       Example: `/bitly ACCESS_TOKENbhdsirb`
-      
+
       And Finally
       Send Your Message with Flipkart or Amazon Link
     help: |
@@ -104,19 +104,25 @@ en:
 
       7. Show Your Words which you have included to the delete list.
       Example: [/show_deleted](/show_deleted)
-      
+
       8. Show Your Complete Configuration which you have set in the Bot..
       Example: [/user_profile](/user_profile)
 
       And Finally
       Send Your Message with Flipkart or Amazon Link"
 
-
   no_setup: |
     Hello, %{first_name}. 🤖
-    
+
     Please Setup the Bot First.
-    
+
     Amazon and Flipkart tags are mandatory, if you are not using anyone of them you can just update some random character to it.
-    
+
     If you want short links to all those long affiliate links, you need to update Bitly Access Token.
+
+  errors:
+    formatting: |
+      An Error Occured while parsing the message.
+
+      Maybe You are using a different font for which I cannot calculate exact character count.
+    channel_forward: An Error Occured While forwarding this message to Channel
