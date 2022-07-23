@@ -14,7 +14,7 @@ class TelegramController < Telegram::Bot::UpdatesController
   # Define method with the same name to handle this type of update.
   def message(message)
     # store_message(message['text'])
-    @message_content = message['text'].gsub('<', '&lt;').gsub('>', '&gt;')
+    @message_content = message['text']&.gsub('<', '&lt;')&.gsub('>', '&gt;') || ''
     parse_inline_entitites(message['entities']) if message['entities']
     if @message_content.match? /http/i
       process_affiliate
