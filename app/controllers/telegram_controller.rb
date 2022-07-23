@@ -27,6 +27,8 @@ class TelegramController < Telegram::Bot::UpdatesController
     reply_with :message, text: @message_content, disable_web_page_preview: disable_previews, parse_mode: :html
   rescue Telegram::Bot::Error => e
     reply_with :message, text: 'An Error occurred with the Bot'
+  rescue SocketError => e
+    reply_with :message, text: "An Error occurred while processing your links: #{e.message}"
   end
 
   # For the following types of updates commonly used params are passed as arguments,
