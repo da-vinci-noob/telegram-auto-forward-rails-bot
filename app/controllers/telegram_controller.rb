@@ -25,6 +25,8 @@ class TelegramController < Telegram::Bot::UpdatesController
     end
     Rails.logger.debug(@message_content)
     reply_with :message, text: @message_content, disable_web_page_preview: disable_previews, parse_mode: :html
+  rescue Telegram::Bot::Error => e
+    reply_with :message, text: 'An Error occurred with the Bot'
   end
 
   # For the following types of updates commonly used params are passed as arguments,
