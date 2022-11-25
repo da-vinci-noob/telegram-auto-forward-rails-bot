@@ -83,6 +83,6 @@ module Setup
   end
 
   def configure_delete(keywords)
-    Cache.redis.sadd("#{@chat_id}:delete", keywords)
+    Cache.redis.sadd("#{@chat_id}:delete", keywords.join(' '))
   end
 end
