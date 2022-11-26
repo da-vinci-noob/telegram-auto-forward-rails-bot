@@ -46,8 +46,8 @@ module Setup
   end
 
   def show_deleted!(*answer)
-    contents = Cache.redis.smembers("#{@chat_id}:delete")
-    respond_with :message, text: (I18n.t 'setup.deleted_contents', contents: contents.join(', '))
+    contents = Cache.redis.smembers("#{@chat_id}:delete")&.map { |a| "`#{a}`" }
+    respond_with :message, text: (I18n.t 'setup.deleted_contents', contents: contents&.join(', ')), parse_mode: :markdown
   end
 
   def user_profile!(*answer)
