@@ -50,6 +50,20 @@ module Setup
     respond_with :message, text: (I18n.t 'setup.deleted_contents', contents: contents&.join(', ')), parse_mode: :markdown
   end
 
+  def remove_deleted!(*args)
+    return respond_with :message, text: (I18n.t 'setup.invalid', param: 'Remove Deleted') if args.blank?
+
+    deleted_contents = Cache.redis.smembers("#{@chat_id}:delete")
+    to_delete = args.join(' ')
+    res = if deleted_contents.include? to_delete
+      Cache.redis.srem("#{@chat_id}:delete", to_delete)
+      (I18n.t 'setup.remove_deleted', to_delete: to_delete)
+    else
+      (I18n.t 'setup.remove_deleted_invalid', to_delete: to_delete)
+    end
+    respond_with :message, text: res, parse_mode: :markdown
+  end
+
   def user_profile!(*answer)
     content = I18n.t 'setup.user_profile', amzn_id: Cache.redis.get("#{@chat_id}:amzn_id"),
                                            fkrt_id: Cache.redis.get("#{@chat_id}:fkrt_id"),

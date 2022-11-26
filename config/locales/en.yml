@@ -32,7 +32,7 @@
 en:
   hello: 'Hello world'
   setup:
-    invalid: Please Enter valid %{param} input
+    invalid: Please Enter valid input for %{param}
     amazon: Hello, Your Amazon Affiliate ID has been set to `%{amzn_id}`. 🤖
     flipkart: Hello, Your Flipkart Affiliate ID has been set to `%{fkrt_id}`. 🤖
     bitly: Hello, Your Bitly Access Token has been set to %{bitly_id}. 🤖
@@ -41,7 +41,7 @@ en:
     delete: '`%{content}`, has been added to the list of text which will be removed from the returned message by bot.'
     deleted_contents: |
       %{contents}
-      These words has been added by you to the Bot and will be removed from the Returned Message"
+      These words has been added by you to the Bot and will be removed from the Returned Message
     user_profile: |
       Amazon Tracking ID: `%{amzn_id}`
       Flipkart Tracking ID: `%{fkrt_id}`
@@ -49,6 +49,8 @@ en:
       Forwarding to (if any): `%{forward}`
       Previews Are: `%{previews}`
       Text to Delete: `%{delete}`
+    remove_deleted: '`%{to_delete}`, has been removed from the deleted contents.'
+    remove_deleted_invalid: '`%{to_delete}`, is not available in deleted contents.'
   instructions:
     start: |
       Hello, %{first_name} 🤖.
@@ -105,7 +107,13 @@ en:
       7. Show Your Words which you have included to the delete list.
       Example: [/show_deleted](/show_deleted)
 
-      8. Show Your Complete Configuration which you have set in the Bot..
+      8. *NEW ADDITION* (Optional)
+      Remove a keyword from the deleted keywords list.
+      You can now remove characters/text/word from the delete(filter) list to remove mistakenly added keyword by
+      `/remove_deleted *text to delete*`
+      Example: `/remove_deleted hello`
+
+      9. Show Your Complete Configuration which you have set in the Bot.
       Example: [/user_profile](/user_profile)
 
       And Finally
