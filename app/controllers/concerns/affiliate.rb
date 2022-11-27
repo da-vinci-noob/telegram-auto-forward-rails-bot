@@ -52,6 +52,9 @@ module Affiliate
       else
         individual_url(last_url)
       end
+    rescue Errno::ECONNREFUSED => e
+      @error = true
+      @updated_url = 'An Error Occurred or an Invalid URL provided in the message'
     end
 
     def fetch_url
