@@ -106,6 +106,7 @@ module Affiliate
 
     def check_for_linksredirect_url(res)
       urls = URI.extract(res.parsed_response, %w[http https])
+      return urls[1] if urls[1].include? 'secure.traqkarr.com'
       urls[2] if res.include? 'cashbackUrl'
     end
   end
