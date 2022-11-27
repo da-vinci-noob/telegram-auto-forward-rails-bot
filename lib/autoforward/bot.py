@@ -3,12 +3,20 @@ import logging
 from telethon.sessions import StringSession
 from variables import *
 
+def check_user_input(val):
+  try:
+    return int(val)
+  except Exception as e:
+    print(e)
+    logging.error(e)
+    return val
+
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s', filename='errors.log', encoding='utf-8', level=logging.WARNING)
 
 print("Starting...")
 
-SOURCE = [i for i in FORWARDER_FROM_CHANNEL.split(',')]
-DESTINATION = [i for i in FORWARDER_TO_CHANNEL.split(',')]
+SOURCE = [check_user_input(i) for i in FORWARDER_FROM_CHANNEL.split(',')]
+DESTINATION = [check_user_input(i) for i in FORWARDER_TO_CHANNEL.split(',')]
 
 try:
   client = TelegramClient(StringSession(SESSION), APP_ID, API_HASH)
