@@ -44,7 +44,7 @@ module Affiliate
     end
 
     def redirection(url)
-      response = HTTParty.get(url, follow_redirects: true)
+      response = HTTParty.get(url, follow_redirects: true, timeout: 3)
       last_url = check_for_linksredirect_url(response) || response.request.last_uri.to_s
       if last_url == updated_url
         @error = true
@@ -52,9 +52,12 @@ module Affiliate
       else
         individual_url(last_url)
       end
-    rescue Errno::ECONNREFUSED => e
+    rescue Errno::ECONNREFUSED
       @error = true
       @updated_url = 'An Error Occurred or an Invalid URL provided in the message'
+    rescue Net::ReadTimeout
+      @error = true
+      @updated_url = "An Error Occurred while processing URL: #{url}"
     end
 
     def fetch_url
