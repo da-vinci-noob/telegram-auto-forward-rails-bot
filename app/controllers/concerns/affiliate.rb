@@ -55,7 +55,7 @@ module Affiliate
     rescue Errno::ECONNREFUSED
       @error = true
       @updated_url = 'An Error Occurred or an Invalid URL provided in the message'
-    rescue Net::ReadTimeout
+    rescue
       @error = true
       @updated_url = "An Error Occurred while processing URL: #{url}"
     end
