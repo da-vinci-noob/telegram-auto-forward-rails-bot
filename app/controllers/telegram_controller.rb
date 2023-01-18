@@ -75,6 +75,8 @@ class TelegramController < Telegram::Bot::UpdatesController
   end
 
   def set_variables
+    return if chat.nil?
+
     @first_name = chat['first_name']
     @chat_id = chat['id']
     @username = chat['username']
