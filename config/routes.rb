@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users, controllers: { :omniauth_callbacks => "users/omniauth_callback" }, skip: [:registrations]
   devise_for :admins, skip: [:registrations]
   get 'administrator', to: 'administrator#index'
   telegram_webhook TelegramController

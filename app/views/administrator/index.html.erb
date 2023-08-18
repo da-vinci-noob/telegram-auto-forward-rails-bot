@@ -9,6 +9,7 @@
               <th class="px-4 py-3">Amazon Tracking ID</th>
               <th class="px-4 py-3">Flipkart Tracking ID</th>
               <th class="px-4 py-3">Bitly Key</th>
+              <th class="px-4 py-3">Words to be deleted</th>
               <th class="px-4 py-3">Are Previews Enabled?</th>
             </tr>
           </thead>
@@ -32,6 +33,7 @@
                 <td class="px-4 py-3 text-sm border"><%= Cache.redis.get "#{k}:amzn_id" %></td>
                 <td class="px-4 py-3 text-sm border"><%= Cache.redis.get "#{k}:fkrt_id" %></td>
                 <td class="px-4 py-3 text-sm border"><%= Cache.redis.get "#{k}:bitly_id" %></td>
+                <td class="px-4 py-3 text-sm border"><%= Cache.redis.smembers("#{k}:delete").join(', ') %></td>
                 <td class="px-4 py-3 text-xs border">
                   <span class='px-2 py-1 font-semibold leading-tight rounded-sm <%= previews_color(Cache.redis.get "#{k}:previews") %>'>
                     <%= (Cache.redis.get "#{k}:previews")&.titleize %>

@@ -1,4 +1,46 @@
-<div>
-  <h1 class="font-bold text-4xl">Home#index</h1>
-  <p>Find me in app/views/home/index.html.erb</p>
+<div class="">
+  <section class="container mx-auto p-6 font-mono">
+    <div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
+      <div class="w-full overflow-x-auto">
+        <table class="w-full">
+          <thead>
+            <tr class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
+              <th class="px-4 py-3"></th>
+              <th class="px-4 py-3">Amazon Tracking ID</th>
+              <th class="px-4 py-3">Flipkart Tracking ID</th>
+              <th class="px-4 py-3">Bitly Key</th>
+              <th class="px-4 py-3">Words to be deleted</th>
+              <th class="px-4 py-3">Are Previews Enabled?</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white">
+            <tr class="text-gray-700">
+              <td class="px-4 py-3 border">
+                <div class="flex items-center text-sm">
+                  <div class="relative w-8 h-8 mr-3 rounded-full md:block">
+                    <img class="object-cover w-full h-full rounded-full" src="<%= current_user.photo_url %>" alt="" loading="lazy" />
+                    <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
+                  </div>
+                  <div>
+                    <p class="font-semibold text-black"><%= "#{current_user.first_name} #{current_user.last_name}" %> </p>
+                    <p class="font-semibold text-black"><%= "Username: #{current_user.username}" %> </p>
+                    <p class="text-xs text-gray-600">ID: <%= @user[:id] %></p>
+                  </div>
+                </div>
+              </td>
+              <td class="px-4 py-3 text-sm border"><%= @user[:amazon_id] %></td>
+              <td class="px-4 py-3 text-sm border"><%= @user[:flipkart_id] %></td>
+              <td class="px-4 py-3 text-sm border"><%= @user[:bitly_key] %></td>
+              <td class="px-4 py-3 text-sm border"><%= @user[:deleted_keywords]&.join(', ') %></td>
+              <td class="px-4 py-3 text-xs border">
+                <span class='px-2 py-1 font-semibold leading-tight rounded-sm <%= previews_color(@user[:previews]) %>'>
+                  <%= @user[:previews]&.titleize %>
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
 </div>
