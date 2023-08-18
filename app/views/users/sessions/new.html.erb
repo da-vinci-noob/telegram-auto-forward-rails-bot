@@ -1,0 +1,12 @@
+<div class="flex flex-col items-center justify-center w-full">
+  <div class="text-2xl font-bold">
+    Log in
+  </div>
+  <div class="mt-14">
+    <%- if devise_mapping.omniauthable? %>
+      <%- resource_class.omniauth_providers.each do |provider| %>
+        <%= button_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), data: { turbo: false }, class: "bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center" %><br />
+      <% end %>
+    <% end %>
+  </div>
+</div>
