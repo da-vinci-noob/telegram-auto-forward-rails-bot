@@ -102,7 +102,7 @@ module Affiliate
         res['response']['shortened_url']
       else
         bitly_id = Cache.redis.get("#{chat_id}:bitly_id")
-        BitlyUrl.new(bitly_id, updated_url).short_url
+        bitly_id.present? ? BitlyUrl.new(bitly_id, updated_url).short_url : updated_url
       end
     rescue StandardError => e
       @error = true
