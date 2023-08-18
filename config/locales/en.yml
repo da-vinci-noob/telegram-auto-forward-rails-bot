@@ -70,6 +70,9 @@ en:
 
       And Finally
       Send Your Message with Flipkart or Amazon Link
+    bitly_command: |
+      Add Bitly key with the below command
+      `/bitly key`
     help: |
       Hello, %{first_name}. 🤖
       You need to make do some setup before the using this Bot

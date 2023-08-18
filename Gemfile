@@ -70,7 +70,7 @@ group :development do
   gem 'rubocop-packaging'
 end
 
-gem 'telegram-bot', git: 'https://github.com/telegram-bot-rb/telegram-bot.git'
+gem 'telegram-bot', '~> 0.15.7'
 gem 'redis'
 gem 'httparty', '~> 0.20.0'
 gem 'addressable', '~> 2.8'
