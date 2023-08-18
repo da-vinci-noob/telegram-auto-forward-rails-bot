@@ -28,14 +28,46 @@
                   </div>
                 </div>
               </td>
-              <td class="px-4 py-3 text-sm border"><%= @user[:amazon_id] %></td>
-              <td class="px-4 py-3 text-sm border"><%= @user[:flipkart_id] %></td>
-              <td class="px-4 py-3 text-sm border"><%= @user[:bitly_key] %></td>
+              <td class="px-4 py-3 text-sm border">
+                <div id="amazon_id" onclick="toggle_form('amazon')">
+                  <%= @user[:amazon_id] %>
+                </div>
+                <div id="amazon" style='display: none'>
+                  <%= form_with url: home_path('amzn_id'), method: :put do |form| %>
+                    <%= form.text_field :val, value: @user[:amazon_id] %>
+                  <% end %>
+                </div>
+              </td>
+              <td class="px-4 py-3 text-sm border">
+                <div id="flipkart_id" onclick="toggle_form('flipkart')">
+                  <%= @user[:flipkart_id] %>
+                </div>
+                <div id="flipkart" style='display: none'>
+                  <%= form_with url: home_path('fkrt_id'), method: :put do |form| %>
+                    <%= form.text_field :val, value: @user[:flipkart_id] %>
+                  <% end %>
+                </div>
+              </td>
+              <td class="px-4 py-3 text-sm border">
+                <div id="bitly_id" onclick="toggle_form('bitly')">
+                  <%= @user[:bitly_key] %>
+                </div>
+                <div id="bitly" style='display: none'>
+                  <%= form_with url: home_path('bitly_id'), method: :put do |form| %>
+                    <%= form.text_field :val, value: @user[:bitly_key]  %>
+                  <% end %>
+                </div>
+              </td>
               <td class="px-4 py-3 text-sm border"><%= @user[:deleted_keywords]&.join(', ') %></td>
               <td class="px-4 py-3 text-xs border">
-                <span class='px-2 py-1 font-semibold leading-tight rounded-sm <%= previews_color(@user[:previews]) %>'>
-                  <%= @user[:previews]&.titleize %>
-                </span>
+                <div class="flex justify-between items-center">
+                  <div class='px-2 py-1 font-semibold leading-tight rounded-sm <%= previews_color(@user[:previews]) %>'>
+                    <%= @user[:previews]&.titleize %>
+                  </div>
+                  <div>
+                    <%= button_to 'Toggle Previews', home_path('toggle'), method: :put %>
+                  </div>
+                </div>
               </td>
             </tr>
           </tbody>
@@ -44,3 +76,13 @@
     </div>
   </section>
 </div>
+
+<script>
+  toggle_form = (form_name) => {
+    var form = document.querySelector(`#${form_name}`);
+    form.style.display = "block"
+
+    var text_id = document.querySelector(`#${form_name}_id`);
+    text_id.style.display = "none"
+  }
+</script>

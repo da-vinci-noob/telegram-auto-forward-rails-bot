@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'administrator', to: 'administrator#index'
   telegram_webhook TelegramController
 
+  resources :home, only: %i[update]
   root 'home#index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
