@@ -1,0 +1,47 @@
+<div class="">
+  <section class="container mx-auto p-6 font-mono">
+    <div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
+      <div class="w-full overflow-x-auto">
+        <table class="w-full">
+          <thead>
+            <tr class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
+              <th class="px-4 py-3"></th>
+              <th class="px-4 py-3">Amazon Tracking ID</th>
+              <th class="px-4 py-3">Flipkart Tracking ID</th>
+              <th class="px-4 py-3">Bitly Key</th>
+              <th class="px-4 py-3">Are Previews Enabled?</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white">
+            <% @user_values.each do |k, _v| %>
+              <tr class="text-gray-700">
+                <td class="px-4 py-3 border">
+                  <div class="flex items-center text-sm">
+                    <!-- TODO: Image
+                    <div class="relative w-8 h-8 mr-3 rounded-full md:block">
+                      <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
+                    </div>
+                    -->
+                    <div>
+                      <!-- TODO: Name -->
+                      <p class="font-semibold text-black"></p>
+                      <p class="text-xs text-gray-600">ID: <%= k %></p>
+                    </div>
+                  </div>
+                </td>
+                <td class="px-4 py-3 text-sm border"><%= Cache.redis.get "#{k}:amzn_id" %></td>
+                <td class="px-4 py-3 text-sm border"><%= Cache.redis.get "#{k}:fkrt_id" %></td>
+                <td class="px-4 py-3 text-sm border"><%= Cache.redis.get "#{k}:bitly_id" %></td>
+                <td class="px-4 py-3 text-xs border">
+                  <span class='px-2 py-1 font-semibold leading-tight rounded-sm <%= previews_color(Cache.redis.get "#{k}:previews") %>'>
+                    <%= (Cache.redis.get "#{k}:previews")&.titleize %>
+                  </span>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</div>

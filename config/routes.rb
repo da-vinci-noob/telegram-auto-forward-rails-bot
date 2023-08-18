@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :admins, skip: [:registrations]
+  get 'administrator', to: 'administrator#index'
   telegram_webhook TelegramController
 
   root 'home#index'
