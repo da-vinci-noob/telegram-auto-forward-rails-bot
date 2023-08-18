@@ -11,8 +11,10 @@ class HomeController < ApplicationController
       previews_to_set = current_preview == 'disabled' ? 'enabled' : 'disabled'
 
       Cache.redis.set("#{current_user.telegram_user_id}:previews", previews_to_set)
+      flash[:notice] = "Previews has been #{previews_to_set.titleize}"
     else
       Cache.redis.set("#{current_user.telegram_user_id}:#{params[:id]}", params[:val])
+      flash[:notice] = "ID has been set to: #{params[:val]}"
     end
     redirect_to home_path
   end
