@@ -78,6 +78,4 @@ test:
 #
 production:
   <<: *default
-  database: telegram_auto_forward_rails_bot_production
-  username: telegram_auto_forward_rails_bot
-  password: <%= ENV["TELEGRAM_AUTO_FORWARD_RAILS_BOT_DATABASE_PASSWORD"] %>
+  url: <%= ENV["TELEGRAM_RAILS_DATABASE_URL"] %>
