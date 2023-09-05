@@ -47,67 +47,55 @@ Run Rails Server
 > rails server
 
 ## Testing
-1. Goto your bot in telegram.
-2. Click on `start` or type /start
-3. Click on `help` or type /help
+Goto your bot in telegram.
+1. Click on `start` or type /start
+2. Click on `help` or type /help
+3. Send below command to set the predefined commands to menu
+```
+/set_commands
+```
 4. Add your Amazon affliate tracking id. Example below
-
 ```
 /amazon tracking_id-21
 ```
-
 5. Add your Flipkart affliate tracking id. Example below
-
 ```
 /flipkart tracking_id
 ```
-
 6. Add your Bit.ly Access token. Example below
-
 ```
 /bitly API-KETuIB
 ```
-
 7. (Optional) Add your channel username to the bot for auto-forwarding of messages. Example below
-
 ```
 /forward @username
 ```
-
 8. (Optional) Disable Link Previews for messages sent back to the bot and channel with affiliate link. Example below
-
 ```
 /previews disable (For Disabling Previews)
 /previews *any other text* (For Enabling Previews if disabled)
 ```
-
 9. (Optional) You can now add characters/text/word to delete from message (This can include any promotional message). Example below
-
 ```
 /delete *text to delete*
 /delete hello
 ```
-
 10. Show Your Words which you have included to the delete list.. Example below
-
 ```
 /show_deleted
 ```
-
-11. Remova a word from the texts to be filtered
-
+11. Remove a word from the texts to be filtered
 ```
 /remove_deleted *text to delete*
 ```
-
 12. Show your Profile i.e. Saved Configuration
 ```
 /user_profile
 ```
 
-Note:
+### Note:
 
-Bot will guide you how to get Bit.ly Access token by below command.
+1. Bot will guide you how to get Bit.ly Access token by below command.
 
 ```
 /bitly_setup
