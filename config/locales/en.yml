@@ -130,6 +130,8 @@ en:
     Amazon and Flipkart tags are mandatory, if you are not using anyone of them you can just update some random character to it.
 
     If you want short links to all those long affiliate links, you need to update Bitly Access Token.
+  
+  set_commands: Commands has been set successfully. 
 
   errors:
     formatting: |
@@ -137,3 +139,4 @@ en:
 
       Maybe You are using a different font for which I cannot calculate exact character count.
     channel_forward: An Error Occured While forwarding this message to Channel
+    set_commands: An Error Occured While setting commands

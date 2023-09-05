@@ -4,6 +4,7 @@ class TelegramController < Telegram::Bot::UpdatesController
   include Setup
   include Affiliate
   include ParseMessage
+  include SetCommands
 
   # use callbacks like in any other controller
   around_action :with_locale
