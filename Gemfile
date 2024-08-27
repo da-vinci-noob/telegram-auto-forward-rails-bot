@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.1.2"
+ruby "3.3.4"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.1"
@@ -70,12 +70,12 @@ group :development do
   gem 'rubocop-packaging'
 end
 
-gem 'telegram-bot', '~> 0.15.7'
+gem 'telegram-bot', '~> 0.16.3'
 gem 'redis'
 gem 'httparty', '~> 0.20.0'
 gem 'addressable', '~> 2.8'
 gem 'bitly', '~> 2.0', '>= 2.0.1'
-gem 'nokogiri', '~> 1.13', '>= 1.13.1'
+gem 'nokogiri', '~> 1.16', '>= 1.16.7'
 gem 'devise', '~> 4.9', '>= 4.9.2'
 gem 'omniauth-rails_csrf_protection', '~> 1.0', '>= 1.0.1'
 gem 'omniauth-telegram', '~> 0.2.1'

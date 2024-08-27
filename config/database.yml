@@ -78,4 +78,7 @@ test:
 #
 production:
   <<: *default
-  url: <%= ENV["TELEGRAM_RAILS_DATABASE_URL"] %>
+  host: <%= ENV.fetch("DB_HOST") { '' } %>
+  username: <%= ENV.fetch("DB_USERNAME") { '' } %>
+  password: <%= ENV.fetch("DB_PASSWORD") { '' } %>
+  database: telegram_auto_forward_rails_bot

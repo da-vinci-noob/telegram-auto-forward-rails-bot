@@ -16,7 +16,7 @@ logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s'
 print("Starting...")
 
 SOURCE = [check_user_input(i) for i in FORWARDER_FROM_CHANNEL.split(',')]
-DESTINATION = [check_user_input(i) for i in FORWARDER_TO_CHANNEL.split(',')]
+DESTINATION = [i for i in FORWARDER_TO_CHANNEL.split(',')]
 
 try:
   client = TelegramClient(StringSession(SESSION), APP_ID, API_HASH)
