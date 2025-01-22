@@ -1,10 +1,10 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.3.4"
+ruby "3.4.1"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 7.0.1"
+gem 'rails', '~> 8.0', '>= 8.0.1'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
@@ -13,7 +13,7 @@ gem "sprockets-rails"
 gem "pg", "~> 1.1"
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem "puma", "~> 5.0"
+gem "puma"
 
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem "importmap-rails"
@@ -52,7 +52,7 @@ group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem 'dotenv', '~> 2.7', '>= 2.7.6'
-  gem 'pry', '~> 0.14.1'
+  gem 'pry'
 end
 
 group :development do
@@ -70,12 +70,13 @@ group :development do
   gem 'rubocop-packaging'
 end
 
-gem 'telegram-bot', '~> 0.16.3'
+gem 'telegram-bot'
 gem 'redis'
-gem 'httparty', '~> 0.20.0'
-gem 'addressable', '~> 2.8'
-gem 'bitly', '~> 2.0', '>= 2.0.1'
-gem 'nokogiri', '~> 1.16', '>= 1.16.7'
+gem 'httparty'
+gem 'addressable'
+gem 'bitly'
+gem 'nokogiri'
 gem 'devise', '~> 4.9', '>= 4.9.2'
 gem 'omniauth-rails_csrf_protection', '~> 1.0', '>= 1.0.1'
 gem 'omniauth-telegram', '~> 0.2.1'
+gem 'mutex_m'
